@@ -21,9 +21,13 @@ class App extends Component {
   }
 
   timeTravel = (id) => {
+    let tempArray = this.state.history.map(x => x)
+    tempArray.splice(id+1)
     // console.log("Heloooo", this.state.history[id])
-    // console.log("Hiiii",this.state.history)
-    this.setState({box: this.state.history[id].box, isXNext: this.state.history[id].isXNext})
+    console.log("Hiiii",this.state.history)
+    console.log("Heeee", tempArray)
+    console.log("My ID", id)
+    this.setState({box: this.state.history[id].box, isXNext: this.state.history[id].isXNext, history: tempArray})
   }
 
   render() {

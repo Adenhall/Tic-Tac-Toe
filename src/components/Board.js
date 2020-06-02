@@ -53,7 +53,7 @@ export default class Board extends Component {
         if (this.calculateWinner(boxArray) !== null) {    
             status ='Winner is '
             gameOverStatus=true
-        } else gameOverStatus = false
+        } else gameOverStatus =false
         if (boxArray.every(x => x !== null) && this.calculateWinner(boxArray) === null) {
             status = "Tie game"
         }
