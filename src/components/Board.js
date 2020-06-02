@@ -9,15 +9,16 @@ export default class Board extends Component {
 
     boxClick = (id) => {
         let boxArray = this.props.box;
-
         if(boxArray[id] !== null) {
             alert("This box has already been chosen!")
         } else {
         this.props.isXNext ? boxArray[id] = "X" : boxArray[id] = "O"
         this.props.setTheState({box: boxArray, isXNext: !this.props.isXNext})
         console.log(boxArray)
+        // this.props.history.push(boxArray)
+        // console.log("History array is ", this.props.history)
         }
-        console.log(this.calculateWinner(boxArray))
+        // console.log(this.calculateWinner(boxArray))
     }
 
     calculateWinner = (squares) => {
@@ -44,13 +45,18 @@ export default class Board extends Component {
         let status =''
         let boxArray = this.props.box;
         if (boxArray.some(x => x === null)) {
-            if(this.calculateWinner(boxArray) == null) {
             this.props.isXNext ? status = "Next Player is X" : status=" Next Player is O"
-            } else status ='Winner is '
-        } else status = "Tie game"
+        }
+        if (this.calculateWinner(boxArray) !== null) {    
+            status ='Winner is '
+            this.boxClick = () => alert("Game Over!")
+        }
+        if (boxArray.every(x => x !== null)) {
+            status = "Tie game"
+        }
         return (
             <div>
-                <h1>{status}{this.calculateWinner(boxArray)}</h1>
+                <h1 className="game-status">{status}{this.calculateWinner(boxArray)}</h1>
                 <div style ={{display: "flex"}}>
                 {this.renderSquare(0)}
                 {this.renderSquare(1)}

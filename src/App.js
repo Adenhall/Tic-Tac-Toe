@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import './App.css';
 import Board from './components/Board';
 
+let history = []
+
 class App extends Component {
   constructor(props) {
     super(props)
@@ -19,7 +21,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Board {...this.state} setTheState={this.setTheState}/>
+        <Board {...this.state} history={history} setTheState={this.setTheState}/>
       </div>
     );
   }
