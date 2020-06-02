@@ -5,3 +5,6 @@
 .game-status {
     text-align: center;
 }
+.game-board {
+    background-color: aquamarine;
+}

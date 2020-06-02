@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import './App.css';
 import Board from './components/Board';
+import History from './components/HistoryBoard.js'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-let history = []
 
 class App extends Component {
   constructor(props) {
@@ -10,7 +11,8 @@ class App extends Component {
     this.state = {
       box: Array(9).fill(null),
       isXNext: true,
-      status:  ''
+      status:  '',
+      history: []
     }
   }
 
@@ -18,10 +20,15 @@ class App extends Component {
     this.setState(obj)
   }
 
+  timeTravel = (id) => {
+    console.log("Heloooo", this.state.history[id])
+  }
+
   render() {
     return (
       <div className="App">
-        <Board {...this.state} history={history} setTheState={this.setTheState}/>
+        <Board className="game-board" {...this.state} setTheState={this.setTheState}/>
+        <History history = {this.state.history} timeTravel ={this.timeTravel}/>
       </div>
     );
   }
