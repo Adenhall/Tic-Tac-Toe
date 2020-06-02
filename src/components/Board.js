@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import Squares from './Squares.js'
 
+let status =''
+let gameOverStatus=false
+
 export default class Board extends Component {
     
     renderSquare = (num) => {
-        return <Squares value={this.props.box[num]} boxClick={() =>this.boxClick(num)}/>
+        return <Squares value={this.props.box[num]} boxClick={gameOverStatus ? () => alert("Game Over!") : () =>this.boxClick(num)}/>
     }
 
     boxClick = (id) => {
@@ -14,9 +17,10 @@ export default class Board extends Component {
         } else {
         this.props.isXNext ? boxArray[id] = "X" : boxArray[id] = "O"
         this.props.setTheState({box: boxArray.slice(), isXNext: !this.props.isXNext, history: [...this.props.history.slice(), {box: boxArray.slice(), isXNext: !this.props.isXNext}]})
-        console.log(boxArray)
+        // console.log(boxArray)
         }
-        console.log(this.props.history)
+        // console.log(this.props.history)
+        console.log(this.props.isGameOver)
         // console.log(this.calculateWinner(boxArray))
     }
 
@@ -41,16 +45,16 @@ export default class Board extends Component {
       }
     
     render() {
-        let status =''
+        
         let boxArray = this.props.box;
         if (boxArray.some(x => x === null)) {
             this.props.isXNext ? status = "Next Player is X" : status=" Next Player is O"
         }
         if (this.calculateWinner(boxArray) !== null) {    
             status ='Winner is '
-            this.boxClick = () => alert("Game Over!")
-        }
-        if (boxArray.every(x => x !== null && this.calculateWinner(boxArray) === null)) {
+            gameOverStatus=true
+        } else gameOverStatus = false
+        if (boxArray.every(x => x !== null) && this.calculateWinner(boxArray) === null) {
             status = "Tie game"
         }
         return (

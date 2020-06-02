@@ -11,8 +11,8 @@ class App extends Component {
     this.state = {
       box: Array(9).fill(null),
       isXNext: true,
-      status:  '',
-      history: []
+      history: [],
+      isGameOver: false
     }
   }
 
@@ -21,14 +21,16 @@ class App extends Component {
   }
 
   timeTravel = (id) => {
-    console.log("Heloooo", this.state.history[id])
+    // console.log("Heloooo", this.state.history[id])
+    // console.log("Hiiii",this.state.history)
+    this.setState({box: this.state.history[id].box, isXNext: this.state.history[id].isXNext})
   }
 
   render() {
     return (
       <div className="App">
         <Board className="game-board" {...this.state} setTheState={this.setTheState}/>
-        <History history = {this.state.history} timeTravel ={this.timeTravel}/>
+        <History {...this.state} setTheState={this.setTheState} timeTravel ={this.timeTravel}/>
       </div>
     );
   }
