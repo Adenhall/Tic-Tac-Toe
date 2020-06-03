@@ -3,9 +3,6 @@ import Squares from './Squares.js'
 
 let status =''
 let gameOverStatus=false
-let start_time
-let time_end
-let game_time
 
 export default class Board extends Component {
     
@@ -13,11 +10,6 @@ export default class Board extends Component {
         return <Squares value={this.props.box[num]} boxClick={gameOverStatus ? () => alert("Game Over!") : () =>this.boxClick(num)}/>
     }
 
-    getStartTime = () => {
-        let this_time = Date.now()
-        start_time = this_time
-        console.log("START",start_time)
-    }
 
     boxClick = (id) => {
         let boxArray = this.props.box.slice();
@@ -30,8 +22,8 @@ export default class Board extends Component {
         }
         // console.log(this.props.history)
         console.log(this.props.isGameOver)
-        if(boxArray.filter(x => x === "X" || x ==="O").length === 1) {this.getStartTime()}
-        
+        if(boxArray.filter(x => x === "X" || x ==="O").length === 1) {this.props.getStartTime()}
+        if (this.calculateWinner(boxArray) !== null) {this.props.getEndGame()}
         // console.log(this.calculateWinner(boxArray))
     }
 
@@ -62,12 +54,11 @@ export default class Board extends Component {
             this.props.isXNext ? status = "Next Player is X" : status=" Next Player is O"
         }
         if (this.calculateWinner(boxArray) !== null) {    
-            time_end = Date.now()
             status ='Winner is '
             gameOverStatus=true
-            console.log("END", time_end)
-            game_time = time_end - start_time
-            console.log("Game time",game_time)
+            // console.log("END", time_end)
+            // game_time = time_end - start_time
+            // console.log("Game time",game_time)
             // this.props.postResult(game_time)
             // this.props.gameTime = game_time
             // // this.props.setTheState({game_time: time_end-start_time})

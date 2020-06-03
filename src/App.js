@@ -6,7 +6,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import FacebookLogin from "react-facebook-login";
 
 let tempRank = []
-let game_time
+let start_time
+let end_time
 
 
 class App extends Component {
@@ -39,6 +40,18 @@ class App extends Component {
     this.getData();
   }
 
+  getStartTime = () => {
+    let this_time = Date.now()
+    start_time = this_time
+    console.log("START",start_time)
+}
+  getEndGame = () => {
+    end_time = Date.now()
+    console.log("End", end_time)
+    this.setState({score: ((end_time - start_time)/1000).toFixed(2)})
+    this.postData()
+  }
+
   responseFacebook = (response) => {
     console.log(response);
     this.setState({ user: response.name });
@@ -60,8 +73,7 @@ class App extends Component {
     });
   };
 
-  postData = async (x) => {
-    this.setState({score: x})
+  postData = async () => {
     let data = new URLSearchParams();
     data.append("player", this.state.user);
     data.append("score", this.state.score);
@@ -93,6 +105,8 @@ class App extends Component {
           {...this.state}
           setTheState={this.setTheState}
           postResult={this.postData}
+          getStartTime = {this.getStartTime}
+          getEndGame={this.getEndGame}
         />
         <div>
           <h3 style={{ textAlign: "center" }}>Hello {this.state.user}</h3>
@@ -125,7 +139,7 @@ class App extends Component {
             )}
           </div>
         </div>
-        <h1>{this.state.score}</h1>
+        <h1>Your time: {this.state.score}</h1>
       </div>
     );
   }
