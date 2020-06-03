@@ -60,10 +60,11 @@ class App extends Component {
     });
   };
 
-  postData = async () => {
+  postData = async (x) => {
+    this.setState({score: x})
     let data = new URLSearchParams();
     data.append("player", this.state.user);
-    data.append("score", this.score);
+    data.append("score", this.state.score);
     const url = `http://ftw-highscores.herokuapp.com/tictactoe-dev`;
     const response = await fetch(url, {
       method: "POST",
@@ -91,7 +92,7 @@ class App extends Component {
           className="game-board"
           {...this.state}
           setTheState={this.setTheState}
-          gameTime={this.game_time}
+          postResult={this.postData}
         />
         <div>
           <h3 style={{ textAlign: "center" }}>Hello {this.state.user}</h3>

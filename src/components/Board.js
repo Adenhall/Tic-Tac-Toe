@@ -50,7 +50,6 @@ export default class Board extends Component {
           const [a, b, c] = lines[i];
           if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
             return squares[a];
-            
           }
         }
         return null;
@@ -69,6 +68,7 @@ export default class Board extends Component {
             console.log("END", time_end)
             game_time = time_end - start_time
             console.log("Game time",game_time)
+            // this.props.postResult(game_time)
             // this.props.gameTime = game_time
             // // this.props.setTheState({game_time: time_end-start_time})
             // console.log("TIME", time_end - start_time)
