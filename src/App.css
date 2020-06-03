@@ -1,10 +1,15 @@
 .App {
     display: flex;
     justify-content: space-around;
+    flex-flow: wrap;
 }
 .game-status {
     text-align: center;
 }
 .game-board {
     background-color: aquamarine;
+}
+.button-zone {
+    width: 500px;
+    margin-top: 20px;
 }
