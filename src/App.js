@@ -29,7 +29,7 @@ class App extends Component {
   };
 
   getData = async () => {
-    let url = `http://ftw-highscores.herokuapp.com/tictactoe-dev`;
+    let url = `https://ftw-highscores.herokuapp.com/tictactoe-dev`;
     let data = await fetch(url);
     let result = await data.json();
     this.setState({ ...this.state, topRank: result.items });
@@ -63,9 +63,9 @@ class App extends Component {
     let tempArray = this.state.history.map((x) => x);
     tempArray.splice(id + 1);
     // console.log("Heloooo", this.state.history[id])
-    console.log("Hiiii", this.state.history);
-    console.log("Heeee", tempArray);
-    console.log("My ID", id);
+    // console.log("Hiiii", this.state.history);
+    // console.log("Heeee", tempArray);
+    // console.log("My ID", id);
     this.setState({
       box: this.state.history[id].box,
       isXNext: this.state.history[id].isXNext,
@@ -77,7 +77,7 @@ class App extends Component {
     let data = new URLSearchParams();
     data.append("player", this.state.user);
     data.append("score", this.state.score);
-    const url = `http://ftw-highscores.herokuapp.com/tictactoe-dev`;
+    const url = `https://ftw-highscores.herokuapp.com/tictactoe-dev`;
     const response = await fetch(url, {
       method: "POST",
       headers: {
@@ -122,7 +122,7 @@ class App extends Component {
                 {tempRank.map((x) => {
                   return (
                     <li>
-                      Player {x.player} scored {x.score}
+                      Player {x.player} completed in {x.score}
                     </li>
                   );
                 })}
