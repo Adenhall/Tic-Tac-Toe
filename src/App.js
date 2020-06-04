@@ -50,6 +50,8 @@ class App extends Component {
     console.log("End", end_time)
     this.setState({score: ((end_time - start_time)/1000).toFixed(2)})
     this.postData()
+    this.getData()
+    tempRank = this.state.topRank.slice().sort((a, b) =>a.score-b.score)
   }
 
   responseFacebook = (response) => {
